@@ -169,6 +169,15 @@ function generateStars($rating) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Accessibility Controls -->
+<button class="accessibility-toggle" onclick="document.getElementById('accessibility-panel').classList.toggle('open')" aria-label="Toggle Accessibility Panel">Accessibility</button>
+
+<div id="accessibility-panel" class="accessibility-panel">
+  <label><input type="checkbox" id="screenReaderToggle" onchange="toggleScreenReader()"> Screen Reader</label><br>
+  <label><input type="checkbox" id="contrastToggle" onchange="toggleContrast()"> High Contrast</label><br>
+  <label><input type="checkbox" id="fontSizeToggle" onchange="toggleFontSize()"> Large Font</label>
+</div>
+
     <!-- Header -->
     <header class="header">
         <nav class="nav">
@@ -369,6 +378,48 @@ function generateStars($rating) {
         </div>
     </footer>
 
-    <script src="script.js"></script>
+   <script>
+  let screenReaderEnabled = false;
+
+  function speakText(text) {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-GB';
+      speechSynthesis.cancel(); // Stop previous
+      speechSynthesis.speak(utterance);
+    }
+  }
+
+  function toggleScreenReader() {
+    screenReaderEnabled = document.getElementById('screenReaderToggle').checked;
+
+    if (screenReaderEnabled) {
+      speakText("Screen reader mode enabled. Press R to read content.");
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('click', () => {
+          const label = el.getAttribute('aria-label') || el.innerText || el.title;
+          speakText(label);
+        });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key.toLowerCase() === 'r') {
+          speakText(document.body.innerText);
+        }
+      });
+    } else {
+      speechSynthesis.cancel();
+    }
+  }
+
+  function toggleContrast() {
+    document.body.classList.toggle('high-contrast');
+  }
+
+  function toggleFontSize() {
+    document.body.classList.toggle('large-font');
+  }
+</script>
+
 </body>
 </html>
