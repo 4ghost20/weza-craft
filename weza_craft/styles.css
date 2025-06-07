@@ -21,6 +21,46 @@ Weza Craft - African Artisan Marketplace
     --font-accent: 'Caveat', cursive;
 }
 
+/* Accessibility Toggle Styles */
+.accessibility-controls {
+  position: fixed;
+  top: 100px;
+  right: 10px;
+  background-color: var(--white);
+  border: 1px solid var(--accent);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  z-index: 2000;
+  font-size: 0.9rem;
+}
+
+.accessibility-controls label {
+  display: block;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.high-contrast {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.high-contrast a {
+  color: #00ffff !important;
+}
+
+.large-text {
+  font-size: 1.3rem;
+}
+
+.large-text h1,
+.large-text h2,
+.large-text h3 {
+  font-size: 150%;
+}
+
+
 /* Reset and Base Styles */
 * {
     margin: 0;
