@@ -241,5 +241,7 @@ $product = isset($products[$product_id]) ? $products[$product_id] : $products[1]
             });
         });
     </script>
+    <script src="accessibility.js"></script>
+
 </body>
 </html>

@@ -699,6 +699,61 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 5px;
     font-weight: bold;
   }
+/* accessibility.css */
+.accessibility-panel {
+  position: fixed;
+  top: 10rem;
+  right: 1rem;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-family: Arial, sans-serif;
+  font-size: 0.875rem;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  z-index: 500;
+  user-select: none;
+}
+
+.accessibility-panel label {
+  display: block;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.accessibility-panel label input[type="checkbox"] {
+  margin-right: 0.3rem;
+  cursor: pointer;
+}
+
+.accessibility-panel label button {
+  margin-left: 0.3rem;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: 1px solid #007BFF;
+  border-radius: 3px;
+  background: white;
+  color: #007BFF;
+  user-select: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.accessibility-panel label button:hover {
+  background-color: #007BFF;
+  color: white;
+}
+
+/* High contrast mode styles */
+.high-contrast {
+  background-color: black !important;
+  color: yellow !important;
+}
+
+.high-contrast a {
+  color: cyan !important;
+  text-decoration: underline;
+}
 
 
 
