@@ -169,6 +169,23 @@ function generateStars($rating) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+      <!-- Accessibility -->
+ <div class="accessibility-controls" aria-label="Accessibility settings">
+  <label>
+    <input type="checkbox" id="screenReaderToggle" onchange="toggleScreenReader()" />
+    Screen Reader Mode
+  </label>
+  <label>
+    <input type="checkbox" id="contrastToggle" onchange="toggleContrast()" />
+    High Contrast
+  </label>
+  <button onclick="changeFontSize(1)" aria-label="Increase font size">A+</button>
+  <button onclick="changeFontSize(-1)" aria-label="Decrease font size">A-</button>
+  <button onclick="resetAccessibility()" aria-label="Reset accessibility settings">Reset</button>
+</div>
+
+
+
     <!-- Header -->
     <header class="header">
         <nav class="nav">
@@ -369,6 +386,39 @@ function generateStars($rating) {
         </div>
     </footer>
 
-    <script src="script.js"></script>
+ <script>
+let screenReaderEnabled = false;
+
+function speakText(text) {
+    if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-GB';
+        speechSynthesis.cancel(); // Stop previous speech
+        speechSynthesis.speak(utterance);
+    }
+}
+
+function toggleScreenReader() {
+    screenReaderEnabled = document.getElementById('screenReaderToggle').checked;
+
+    if (screenReaderEnabled) {
+        speakText("Screen reader mode enabled. Press R to read page content.");
+    } else {
+        speakText("Screen reader mode disabled.");
+        speechSynthesis.cancel();
+    }
+}
+
+// Allow pressing "R" to read content
+document.addEventListener('keydown', function(e) {
+    if (screenReaderEnabled && e.key.toLowerCase() === 'r') {
+        const mainContent = document.body.innerText || '';
+        speakText(mainContent.substring(0, 1000)); // Limit to first 1000 characters
+    }
+});
+</script>
+
+<script src="accessibility.js"></script>
+
 </body>
 </html>
